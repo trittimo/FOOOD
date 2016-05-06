@@ -3,7 +3,6 @@ body {
 	background-image: url("../images/recipes-background.jpg");
 	background-attachment: fixed;
 	background-position: center;
-	overflow: hidden;
 }
 
 .bounding-box {
