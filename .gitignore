@@ -1,5 +1,6 @@
 # Ignore .psd files since they're huge
 *.psd
+Ignore/*
 
 # Sensitive info
 run.bat
