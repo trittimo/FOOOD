@@ -1,6 +1,8 @@
 # Ignore large files
 *.psd
 data.*
+ingredients.*
+*.sql
 
 # Sensitive info
 run.bat
