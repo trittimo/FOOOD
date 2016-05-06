@@ -3,6 +3,7 @@ body {
 	background-image: url("../images/recipes-background.jpg");
 	background-attachment: fixed;
 	background-position: center;
+	overflow: hidden;
 }
 
 .bounding-box {
@@ -31,6 +32,8 @@ body {
 	margin-top: 45px;
 	padding: 15px;
 	padding-left: 25px;
+	padding-top: 3px;
+	height: 90%;
 }
 
 h1 {

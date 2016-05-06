@@ -8,9 +8,9 @@
 	<meta name="description" content="Create and discover recipes that have all your favorite flavors and ingredients. Then have one of our expertly trained chefs cook and deliver it to your house.">
 	<meta name="author" content="THEFOÖOD">
 
-	<link rel="stylesheet" href="fonts/LatoLatin/latolatinfonts.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/recipe.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'fonts/LatoLatin/latolatinfonts.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename = 'css/recipe.css') }}">
 
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -40,21 +40,25 @@
 		</div>
 	</div>
 	<div id="main-content">
-		<div id="title"><h1>Green Eggs and Ham</h1></div>
+		<div id="title"><h1>{{ title }}</h1></div>
 		<div id="recipe" class="bounding-box">
 			<div id="instructions">
 				<h2>Ingredients</h2>
 				<ul>
-					<li>1 x Egg</li>
-					<li>1 x Hamm</li>
-					<li>1 Liter of Green Food Coloring</li>
+					{% for entry in ingredients %}
+					<li>{{ entry }}</li>
+					{% else %}
+					<li>There are no ingredients in this recipe!</li>
+					{% endfor %}
 				</ul>
 
 				<h2>Instructions</h2>
 				<ol>
-					<li>Cook the ham</li>
-					<li>Cook the Egg, over-easy</li>
-					<li>Apply green food coloring</li>
+					{% for entry in instructions %}
+					<li>{{ entry }}</li>
+					{% else %}
+					<li>There are no instructions in this recipe!</li>
+					{% endfor %}
 				</ol>
 			</div>
 		</div>
