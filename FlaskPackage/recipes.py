@@ -2,7 +2,7 @@ import flask
 import pypyodbc as db
 import constants
 
-BLUEPRINT = flask.Blueprint('instructions', __name__)
+BLUEPRINT = flask.Blueprint('recipes', __name__)
 
 def get_ingredients(recipe_id, connection):
     cursor = connection.cursor()
@@ -26,8 +26,8 @@ def get_title(recipe_id, connection):
     results = cursor.fetchall()
     return results[0][0].strip()
 
-@BLUEPRINT.route('/', methods=['GET'])
-def recipe():
+@BLUEPRINT.route('/recipe.html', methods=['GET'])
+def show_instructions():
     connection = db.connect(constants.DB_DATA.format(constants.DB_USERNAME, constants.DB_PASSWORD))
 
     recipe_id = flask.request.args.get('recipeid', '0')
@@ -40,3 +40,7 @@ def recipe():
                                  ingredients=ingredients,
                                  instructions=instructions,
                                  title=title)
+
+@BLUEPRINT.route('/search-by-ingredients.html', methods=['GET'])
+def search_by_ingredients():
+    return flask.render_template('search-by-ingredients.html')

@@ -1,16 +1,15 @@
 """The server for FOOOD"""
 
 import flask
-import instructions
+import recipes
 
 
 APP = flask.Flask(__name__)
 
-APP.register_blueprint(instructions.blueprint, url_prefix='/instructions')
+APP.register_blueprint(recipes.BLUEPRINT, url_prefix='/recipes')
 
 @APP.route("/")
 def index():
-    """Returns the index page when we browse the root of the site"""
     return flask.render_template('index.html')
 
 if __name__ == "__main__":
