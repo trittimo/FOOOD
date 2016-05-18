@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, Blueprint
+from flask import render_template, request, Blueprint
 import pypyodbc as db
 import constants
 

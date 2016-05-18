@@ -2,5 +2,8 @@
 *.psd
 Ignore/*
 
+# Cache stuff which doesn't matter
+__pycache__/
+
 # Sensitive info
 constants.py

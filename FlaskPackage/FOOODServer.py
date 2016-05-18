@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request
+import flask
 import pypyodbc as db
 import constants
 from instructions import instructions
 
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 app.register_blueprint(instructions)
 
