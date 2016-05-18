@@ -2,7 +2,7 @@ from flask import render_template, request, Blueprint
 import pypyodbc as db
 import constants
 
-instructions = Blueprint('instructions', __name__)
+blueprint = Blueprint('instructions', __name__)
 
 def getIngredients(recipeID, connection):
   cursor = connection.cursor()
@@ -18,7 +18,6 @@ def getInstructions(recipeID, connection):
   cursor.execute(constants.SELECT_RECIPEINSTRUCTIONS, [recipeID])
   results = cursor.fetchall()
   instructions = results[0][0].strip().split('\n')
-  # del instructions[1:]
   return instructions
 
 def getTitle(recipeID, connection):
@@ -27,7 +26,7 @@ def getTitle(recipeID, connection):
   results = cursor.fetchall()
   return results[0][0].strip()
 
-@instructions.route('/instructions', methods = ['GET'])
+@blueprint.route('/', methods = ['GET'])
 def recipe():
   connection = db.connect(constants.DB_DATA.format(constants.DB_USERNAME, constants.DB_PASSWORD))
 
