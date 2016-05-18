@@ -1,16 +1,17 @@
+"""The server for FOOOD"""
+
 import flask
-import pypyodbc as db
-import constants
 import instructions
 
 
-app = flask.Flask(__name__)
+APP = flask.Flask(__name__)
 
-app.register_blueprint(instructions.blueprint, url_prefix = '/instructions')
+APP.register_blueprint(instructions.blueprint, url_prefix='/instructions')
 
-@app.route("/")
+@APP.route("/")
 def index():
-  return flask.render_template('index.html')
+    """Returns the index page when we browse the root of the site"""
+    return flask.render_template('index.html')
 
 if __name__ == "__main__":
-  app.run(debug = True) # TODO: debug = False
+    APP.run(debug=True)
