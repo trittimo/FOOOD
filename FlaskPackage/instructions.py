@@ -1,8 +1,8 @@
-from flask import render_template, request, Blueprint
+import flask
 import pypyodbc as db
 import constants
 
-blueprint = Blueprint('instructions', __name__)
+blueprint = flask.Blueprint('instructions', __name__)
 
 def getIngredients(recipeID, connection):
   cursor = connection.cursor()
@@ -30,14 +30,14 @@ def getTitle(recipeID, connection):
 def recipe():
   connection = db.connect(constants.DB_DATA.format(constants.DB_USERNAME, constants.DB_PASSWORD))
 
-  recipe_id = request.args.get('recipeid', '0')
+  recipe_id = flask.request.args.get('recipeid', '0')
    
   ingredients = getIngredients(recipe_id, connection)
   instructions = getInstructions(recipe_id, connection)
   title = getTitle(recipe_id, connection)
   connection.close()
 
-  return render_template('recipe.html',
-              ingredients = ingredients,
-              instructions = instructions,
-              title = title)
+  return flask.render_template('recipe.html',
+                               ingredients = ingredients,
+                               instructions = instructions,
+                               title = title)
