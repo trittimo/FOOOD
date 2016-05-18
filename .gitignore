@@ -3,4 +3,4 @@
 Ignore/*
 
 # Sensitive info
-run.bat
+constants.py
