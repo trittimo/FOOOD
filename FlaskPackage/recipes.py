@@ -44,7 +44,7 @@ def show_instructions():
                                  instructions=instructions,
                                  title=title)
 
-@BLUEPRINT.route('/search-by-ingredients.html', methods=['GET'])
+@BLUEPRINT.route('/search-by-ingredients.html', methods=['POST'])
 def search_by_ingredients():
     return flask.render_template('recipes/search-by-ingredients.html')
 

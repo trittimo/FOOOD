@@ -1,0 +1,55 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>FOÖOD - {{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'fonts/LatoLatin/latolatinfonts.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/search.css') }}">
+
+        <script src="{{ url_for('static', filename = 'scripts/search-by-ingredients.js') }}"></script>
+
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div id="header">
+            <h1><a href="/">FOÖOD</a></h1>
+        </div>
+        <div id="content">
+            <div id="search-form">
+            <form action="" method="GET">
+                <div id="ingredient-form">
+                    INGREDIENT: <input type="text" class="ingredient"><br>
+                    INGREDIENT: <input type="text" class="ingredient"><br>
+                    INGREDIENT: <input type="text" class="ingredient"><br>
+                    INGREDIENT: <input type="text" class="ingredient"><br>
+                    INGREDIENT: <input type="text" class="ingredient"><br>
+                </div>
+                <button type="button" onclick="addIngredients()">Add Ingredients</button>
+                <input type="submit" value="Search" onclick="submitIngredients()">
+            </form>
+            </div>
+            <div id="search-results">
+                {% if not chefs %}
+                    <p>Search for Recipes</p>
+                {% else %}
+                    <table>
+                        {% for entry in chefs %}
+                        <tr>
+                            <td>ID</td><td>{{ entry.id }}</td>
+                            <td>EMAIL</td><td>{{ entry.email }}</td>
+                            <td>SPECIALITY</td><td>{{ entry.speciality }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>No chefs were found by that email or id!<td>
+                        {%endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
