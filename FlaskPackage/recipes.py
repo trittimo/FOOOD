@@ -46,9 +46,6 @@ def show_instructions():
                                  instructions=instructions,
                                  title=title)
 
-def percent(item):
-    "%" + item + "%"
-
 def find_recipes_with_ingredients(ingredients, connection):
     if len(ingredients) == 0:
         return False

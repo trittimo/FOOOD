@@ -1,0 +1,8 @@
+FOOOD Site Instructions
+
+To run the server, switch to the flask branch and run
+	> py FlaskPackage/FOOODServer.py
+Then navigate to 127.0.0.1:5000 to view the website
+
+To view some of our designs, switch to the gh-pages branch
+Other branches are probably not important, but you can look at them if you wish
