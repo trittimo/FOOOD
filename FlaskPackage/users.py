@@ -19,10 +19,9 @@ def try_login(username, password, connection):
         return -1
 
 def delete_order(order, username, connection):
-    print("Deleting " + str(order) + " from " + str(username))
     cursor = connection.cursor()
     cursor.execute(constants.DELETE_ORDER, [order])
-    
+    cursor.commit()
     return get_orders(username, cursor)
 
 def get_orders(username, cursor):
@@ -66,13 +65,26 @@ def vieworders():
 def add_order(username, email, recipe, connection):
     cursor = connection.cursor()
     cursor.execute(constants.INSERT_ORDER, [username, email, recipe])
-    cursor.fetchall()
+    cursor.commit()
+    cursor.close()
     return
 
 @BLUEPRINT.route('/order.html', methods=['POST', 'GET'])
 def order():
-    # TODO
-    return flask.render_template('user/order.html')
+    connection = db.connect(constants.DB_DATA.format(constants.DB_USERNAME, constants.DB_PASSWORD))
+
+    username = flask.request.form.get('username')
+    password = flask.request.form.get('password')
+    recipeid = flask.request.form.get('recipe')
+    chef = flask.request.form.get('chef')
+
+    if username and password and recipeid and chef:
+        add_order(username, chef, recipeid, connection)
+        connection.close()
+        return flask.render_template('user/order.html', success=True)
+
+    connection.close()
+    return flask.render_template('user/order.html', recipe=flask.request.args.get('id'))
 
 @BLUEPRINT.route('/login.html', methods=['POST', 'GET'])
 def login():

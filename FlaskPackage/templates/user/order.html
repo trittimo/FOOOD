@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>FOÖOD - {{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'fonts/LatoLatin/latolatinfonts.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/search.css') }}">
+
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div id="header">
+            <h1><a href="/">FOÖOD</a></h1>
+        </div>
+        <div id="content">
+            <div id="add-form">
+                <form action="" method="POST">
+                    <fieldset>
+                        <legend>Login Info</legend>
+                        Username: <input type="text" name="username"><br>
+                        Password: <input type="password" name="password"><br>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Order Info</legend>
+                        Chef email: <input type="text" name="chef"><br>
+                    </fieldset>
+                    <input type="hidden" value="{{recipe}}" name="recipe">
+                    <input type="submit" value="Submit your orders">
+                </form>
+            </div>
+            <div id="add-results">
+                {% if success %}
+                <p>Order successfully placed! You can view your pending orders <a href="/user/view-orders.html">here</a></p>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

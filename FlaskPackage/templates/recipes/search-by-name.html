@@ -31,7 +31,8 @@
                     <table>
                         {% for entry in recipes %}
                         <tr>
-                            <a href="/user/order.html?id={{ entry.id }}">Order {{ entry.name }} (${{ entry.price }})</a><br>
+                            <td><a href="/user/order.html?id={{ entry.id }}">Order {{ entry.name }} (${{ entry.price }})</a><br></td>
+                            <td><a href="/recipes/recipe.html?recipeid={{ entry.id }}">View Instructions</a></td>
                         </tr>
                         {% else %}
                         <tr>No results found</tr>
