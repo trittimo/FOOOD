@@ -46,17 +46,21 @@ def show_instructions():
                                  instructions=instructions,
                                  title=title)
 
+def percent(item):
+    "%" + item + "%"
+
 def find_recipes_with_ingredients(ingredients, connection):
     if len(ingredients) == 0:
         return False
     cursor = connection.cursor()
     query = ''
+    
     for item in ingredients:
         query += constants.INSERTION
 
     query = constants.SELECT_RECIPES_BY_INGREDIENTS.format(query[:-4])
     print(query)
-
+    ingredients = list(map(lambda x: "%" + x + "%", ingredients))
     ingredients.append(len(ingredients))
     cursor.execute(query, ingredients)
     results = cursor.fetchall()

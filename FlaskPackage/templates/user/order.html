@@ -34,6 +34,9 @@
                 </form>
             </div>
             <div id="add-results">
+                {% if badlogin %}
+                <p>Invalid credentials</p>
+                {% endif %}
                 {% if success %}
                 <p>Order successfully placed! You can view your pending orders <a href="/user/view-orders.html">here</a></p>
                 {% endif %}

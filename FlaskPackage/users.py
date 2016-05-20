@@ -79,6 +79,9 @@ def order():
     chef = flask.request.form.get('chef')
 
     if username and password and recipeid and chef:
+        if try_login(username, password, connection) == -1:
+            connection.close()
+            return flask.render_template('user/order.html', badlogin=True)
         add_order(username, chef, recipeid, connection)
         connection.close()
         return flask.render_template('user/order.html', success=True)
