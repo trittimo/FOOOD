@@ -6,3 +6,5 @@ Then navigate to 127.0.0.1:5000 to view the website
 
 To view some of our designs, switch to the gh-pages branch
 Other branches are probably not important, but you can look at them if you wish
+
+IMPORTANT NOTE: FlaskPackage/constants.py is IMPORTANT but it is ignored in git due to security issues. If you do not have this file in your project, you will have to recreate it (good luck).
