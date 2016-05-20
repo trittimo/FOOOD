@@ -20,7 +20,6 @@
         <div id="content">
             <div id="search-form">
                 <form action="" method="GET">
-                    ID: <input type="text" name="id"><br>
                     EMAIL: <input type="text" name="email"><br>
                     SPECIALITY: <input type="text" name="speciality"><br>
                     <input type="submit">
@@ -33,7 +32,6 @@
                     <table>
                         {% for entry in chefs %}
                         <tr>
-                            <td>ID</td><td>{{ entry.id }}</td>
                             <td>EMAIL</td><td>{{ entry.email }}</td>
                             <td>SPECIALITY</td><td>{{ entry.speciality }}</td>
                         </tr>

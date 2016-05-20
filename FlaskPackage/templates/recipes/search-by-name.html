@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>FOÖOD - {{ title }}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'fonts/LatoLatin/latolatinfonts.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/search.css') }}">
+
+        <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div id="header">
+            <h1><a href="/">FOÖOD</a></h1>
+        </div>
+        <div id="content">
+            <div id="search-form">
+                <form action="" method="GET">
+                    Recipe Name: <input type="text" name="recipe"><br>
+                    <input type="submit">
+                </form>
+            </div>
+            <div id="search-results">
+                {% if not recipes %}
+                    <p>No results found</p>
+                {% else %}
+                    <table>
+                        {% for entry in recipes %}
+                        <tr>
+                            <a href="/user/order.html?order={{ entry.id }}">Order {{ entry.name }}</a>
+                        </tr>
+                        {% else %}
+                        <tr>No results found<td>
+                        {%endfor %}
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
