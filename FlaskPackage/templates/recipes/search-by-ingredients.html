@@ -21,7 +21,7 @@
         </div>
         <div id="content">
             <div id="search-form">
-            <form action="" method="GET">
+            <form action="" method="POST">
                 <div id="ingredient-form">
                     INGREDIENT: <input type="text" class="ingredient"><br>
                     INGREDIENT: <input type="text" class="ingredient"><br>
@@ -30,22 +30,21 @@
                     INGREDIENT: <input type="text" class="ingredient"><br>
                 </div>
                 <button type="button" onclick="addIngredients()">Add Ingredients</button>
-                <input type="submit" value="Search" onclick="submitIngredients()">
+                <button type="submit" onclick="submitIngredients()">Search</button>
             </form>
             </div>
             <div id="search-results">
-                {% if not chefs %}
-                    <p>Search for Recipes</p>
+                {% if not recipes %}
+                    <p>No results found</p>
                 {% else %}
                     <table>
-                        {% for entry in chefs %}
+                        {% for entry in recipes %}
                         <tr>
-                            <td>ID</td><td>{{ entry.id }}</td>
-                            <td>EMAIL</td><td>{{ entry.email }}</td>
-                            <td>SPECIALITY</td><td>{{ entry.speciality }}</td>
+                            <td><a href="/user/order.html?id={{ entry.id }}">Order {{ entry.name }} (${{ entry.price }})</a><br></td>
+                            <td><a href="/recipes/recipe.html?recipeid={{ entry.id }}">View Instructions</a></td>
                         </tr>
                         {% else %}
-                        <tr>No chefs were found by that email or id!<td>
+                        <tr>No results found</tr>
                         {%endfor %}
                     </table>
                 {% endif %}

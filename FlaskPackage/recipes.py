@@ -1,6 +1,7 @@
 import flask
 import pypyodbc as db
 import constants
+import json
 
 BLUEPRINT = flask.Blueprint('recipes', __name__)
 
@@ -45,8 +46,39 @@ def show_instructions():
                                  instructions=instructions,
                                  title=title)
 
+def find_recipes_with_ingredients(ingredients, connection):
+    if len(ingredients) == 0:
+        return False
+    cursor = connection.cursor()
+    query = ''
+    for item in ingredients:
+        query += constants.INSERTION
+
+    query = constants.SELECT_RECIPES_BY_INGREDIENTS.format(query[:-4])
+    print(query)
+
+    ingredients.append(len(ingredients))
+    cursor.execute(query, ingredients)
+    results = cursor.fetchall()
+
+    recipes = []
+    for row in results:
+        recipes.append({'name':row[1],'price':round(row[3],2),'id':row[0]})
+
+    return recipes
+    
+
 @BLUEPRINT.route('/search-by-ingredients.html', methods=['GET','POST'])
 def search_by_ingredients():
+    connection = db.connect(constants.DB_DATA.format(constants.DB_USERNAME, constants.DB_PASSWORD))
+    recipe = flask.request.form.get('ingredients')
+
+    if recipe:
+        result = find_recipes_with_ingredients(json.loads(recipe), connection)
+        connection.close()
+        return flask.render_template('recipes/search-by-ingredients.html', recipes=result)
+
+    connection.close()
     return flask.render_template('recipes/search-by-ingredients.html')
 
 def find_recipes_with_name(name, connection):

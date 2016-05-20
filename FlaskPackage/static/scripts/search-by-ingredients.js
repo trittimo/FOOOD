@@ -10,12 +10,20 @@ function addIngredients() {
 }
 
 function submitIngredients() {
-	var inputs = document.getElementById("ingredient-form").getElementsByTagName("input");
+	var form = document.getElementById("ingredient-form");
+	var inputs = form.getElementsByTagName("input");
 	var ingredients = [];
 
 	for (i = 0; i < inputs.length; i++) {
-		ingredients[i] = inputs.value
+		if (inputs[i].value) {
+			ingredients.push(inputs[i].value)
+		}
 	}
-
 	
+	var field = document.createElement("input")
+	field.setAttribute("type", "hidden");
+	field.setAttribute("name", "ingredients");
+	field.setAttribute("value", JSON.stringify(ingredients));
+	form.appendChild(field);
+	form.submit();
 }
