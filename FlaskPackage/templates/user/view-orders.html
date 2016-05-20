@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename = 'css/main.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename = 'css/search.css') }}">
 
+        <script src="{{ url_for('static', filename = 'scripts/view-orders.js') }}"></script>
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <![endif]-->
@@ -19,23 +20,29 @@
         </div>
         <div id="content">
             <div id="search-form">
-                <form action="" method="GET">
-                    Recipe Name: <input type="text" name="recipe"><br>
-                    <input type="submit">
+                <form action="" method="POST">
+                    Username: <input type="text" name="username"><br>
+                    Password: <input type="password" name="password"><br>
+                    <input type="submit" value="View your Orders">
                 </form>
             </div>
             <div id="search-results">
-                {% if not recipes %}
-                    <p>No results found</p>
+                {% if badlogin %}
+                    <p>Bad login info! Try a different username/password</p>
+                {% endif %}
+                {% if not orders %}
+
+                    <!--<p>No results found</p>-->
                 {% else %}
                     <table>
-                        {% for entry in recipes %}
+                        {% for entry in orders %}
                         <tr>
-                            <a href="/user/order.html?id={{ entry.id }}">Order {{ entry.name }} (${{ entry.price }})</a><br>
+                            <td>At {{ entry.time }} you ordered a ${{ entry.price }} meal</td>
+                            <td><button onclick="cancelOrder({{ entry.id }}, '{{ username }}', {{ sessionID }})">Cancel Order</button></td>
                         </tr>
                         {% else %}
-                        <tr>No results found</tr>
-                        {%endfor %}
+                        <tr>You've not made any orders yet!</tr>
+                        {% endfor %}
                     </table>
                 {% endif %}
             </div>

@@ -19,13 +19,14 @@
         </div>
         <div id="content">
             <form action="" method="POST">
-                <input type="text" name="username"><br>
-                <input type="password" name="password"><br>
+                Username <input type="text" name="username"><br>
+                Password <input type="password" name="password"><br>
                 <input type="submit">
             </form>
-            {% if success %}
+            {% if sessionID != -1 and sessionID %}
+                <script>document.cookie = "sid={{ sessionID }}"</script>
                 <p>Login successful!</p>
-            {% else %}
+            {% elif sessionID == -1 %}
                 <p>Login unsuccessful</p>
             {% endif %}
         </div>
