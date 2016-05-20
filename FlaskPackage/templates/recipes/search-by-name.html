@@ -31,7 +31,7 @@
                     <table>
                         {% for entry in recipes %}
                         <tr>
-                            <a href="/user/order.html?order={{ entry.id }}">Order {{ entry.name }}</a>
+                            <a href="/user/order.html?id={{ entry.id }}">Order {{ entry.name }} (${{ entry.price }})</a><br>
                         </tr>
                         {% else %}
                         <tr>No results found<td>
